@@ -27,27 +27,19 @@ class AddToDoViewController: UIViewController {
         }
         
         let dataFromCoreData = accessToCoreData.persistentContainer.viewContext
-        
+
         let newToDo = ToDoCD(context: dataFromCoreData)
+
+        //these lines give the object information from the user input
+             newToDo.descriptionInCD = descriptionInput.text
+             newToDo.importantInCD = switchInput.isOn
+
+        //This is like clicking "save"! Our new object is now safe in Core Data!
+             accessToCoreData.saveContext()
+
+        //this send the user back to the Table View Controller
+             navigationController?.popViewController(animated: true)
         
-        newToDo.descriptionInCD = descriptionInput.text
-        newToDo.importantInCD = switchInput.isOn
-        
-        accessToCoreData.saveContext()
-        
-        navigationController?.popViewController(animated: true)
-        
-        /* let newToDo = ToDoClass()
-        
-        if let checkInput = descriptionInput.text {
-            newToDo.description = checkInput
-            newToDo.important = switchInput.isOn
-        }
-        
-        previousToDoTVC.listOfToDo.append(newToDo)
-        previousToDoTVC.tableView.reloadData()
-        navigationController?.popViewController(animated: true)
-        */
     }
     
     
